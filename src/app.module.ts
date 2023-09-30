@@ -2,6 +2,8 @@ import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { TagsModule } from "./tags/tags.module";
+import { UserModule } from "./user/user.module";
+import { ArticleModule } from "./article/article.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 @Module({
@@ -19,6 +21,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
       logging: true,
     }),
     TagsModule,
+    UserModule,
+    ArticleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

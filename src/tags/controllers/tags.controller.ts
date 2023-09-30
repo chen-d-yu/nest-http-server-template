@@ -8,7 +8,7 @@ import {
   Param,
 } from "@nestjs/common";
 import { TagsService } from "../services/tags.service";
-import { Tags } from "../entities/tags.entities";
+import { Tags } from "../entities/tags.entity";
 import { CommonParams } from "src/typings/controllers";
 
 @Controller("tags")
