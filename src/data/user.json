@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "zhangsan",
+    "age": 18,
+    "password": "123456"
+  },
+  {
+    "id": 2,
+    "name": "lisi",
+    "age": 19,
+    "password": "123456"
+  }
+]
