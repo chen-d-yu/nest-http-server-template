@@ -13,8 +13,10 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UsePipes,
 } from '@nestjs/common';
 import { PipesService } from './pipes.service';
+import { ValidationPipe } from './common/validationPipe.pipe';
 
 enum Gender {
   male = 'male',
@@ -22,18 +24,19 @@ enum Gender {
 }
 
 @Controller('pipes')
+@UsePipes(new ValidationPipe())
 export class PipesController {
   constructor(private readonly pipesService: PipesService) {}
 
-  @Get()
-  findOne(
-    @Query('id', new DefaultValuePipe(0))
-    id: number,
-  ) {
-    console.log(typeof id);
-    console.log(id);
-    return this.pipesService.findOne(id);
-  }
+  //  @Get()
+  //  findOne(
+  //    @Query('id', new DefaultValuePipe(0))
+  //    id: number,
+  //  ) {
+  //    console.log(typeof id);
+  //    console.log(id);
+  //    return this.pipesService.findOne(id);
+  //  }
 
   // ParseFloatPipe
   //  @Post()
@@ -81,4 +84,18 @@ export class PipesController {
   //    console.log(gender);
   //    return gender;
   //  }
+
+  // ValidationPipe自定义管道
+  @Get()
+  findOne(
+    @Query(
+      'id',
+      // , new ValidationPipe() // 参数作用域
+    )
+    id: number,
+  ) {
+    console.log(typeof id);
+    console.log(id);
+    return this.pipesService.findOne(id);
+  }
 }
