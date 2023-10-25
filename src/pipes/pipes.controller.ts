@@ -5,97 +5,61 @@ import {
   Get,
   HttpException,
   HttpStatus,
-  Param,
   ParseArrayPipe,
-  ParseBoolPipe,
   ParseEnumPipe,
-  ParseFloatPipe,
   ParseIntPipe,
   Post,
   Query,
-  UsePipes,
 } from '@nestjs/common';
-import { PipesService } from './pipes.service';
-import { CustomValidationPipe } from './common/custom-validationPipe.pipe';
-
-enum Gender {
-  male = 'male',
-  female = 'female',
-}
+import { Gender, users } from './pipe.contant';
+import { UserDto } from './dto/user.dto';
 
 @Controller('pipes')
-@UsePipes(new CustomValidationPipe())
 export class PipesController {
-  constructor(private readonly pipesService: PipesService) {}
-
-  //  @Get()
-  //  findOne(
-  //    @Query('id', new DefaultValuePipe(0))
-  //    id: number,
-  //  ) {
-  //    console.log(typeof id);
-  //    console.log(id);
-  //    return this.pipesService.findOne(id);
-  //  }
-
-  // ParseFloatPipe
-  //  @Post()
-  //  findOne(
-  //    @Body('num', ParseFloatPipe)
-  //    num: number,
-  //  ) {
-  //    console.log(typeof num);
-  //    console.log(num);
-  //    return num;
-  //  }
-
-  // ParseBoolPipe
-  //  @Post()
-  //  findOne(
-  //    @Body('flag', ParseBoolPipe)
-  //    flag: boolean,
-  //  ) {
-  //    console.log(typeof flag);
-  //    console.log(flag);
-  //    return flag;
-  //  }
-
-  // ParseArrayPipe
-  //  @Post()
-  //  findOne(
-  //    @Body(
-  //      'arr',
-  //      new ParseArrayPipe({
-  //        items: String,
-  //        separator: ',',
-  //      }),
-  //    )
-  //    arr: string[],
-  //  ) {
-  //    console.log(typeof arr);
-  //    console.log(arr);
-  //    return arr;
-  //  }
-
-  // ParseEnumPipe
-  //  @Post()
-  //  findOne(@Body('gender', new ParseEnumPipe(Gender)) gender: Gender) {
-  //    console.log(typeof gender);
-  //    console.log(gender);
-  //    return gender;
-  //  }
-
-  // ValidationPipe自定义管道
-  @Get()
-  findOne(
+  @Get('int')
+  testIntPipe(
     @Query(
       'id',
-      // , new CustomValidationPipe() // 参数作用域
+      new ParseIntPipe({
+        errorHttpStatusCode: HttpStatus.BAD_GATEWAY, // 指定状态码
+        exceptionFactory: () =>
+          // 指定状态码同时指定错误信息
+          new HttpException(
+            '自定义返回响应错误信息——用户不存在',
+            HttpStatus.BAD_GATEWAY,
+          ),
+      }),
     )
     id: number,
   ) {
-    console.log(typeof id);
+    //    if (!user) {
+    //      throw new HttpException('用户不存在', HttpStatus.BAD_REQUEST);
+    //    }
+
+    return users.find((item) => item.id === id);
+  }
+
+  @Get('arr')
+  testArrPipe(
+    @Query('ids', new ParseArrayPipe({ items: Number, separator: ',' }))
+    ids: number[],
+  ) {
+    return users.filter((item) => ids.includes(item.id));
+  }
+
+  @Get('enum')
+  testEnumPipe(@Query('gender', new ParseEnumPipe(Gender)) gender: Gender) {
+    return users.filter((item) => item.gender === gender);
+  }
+
+  @Get('default-val')
+  testDefaultValPipe(@Query('id', new DefaultValuePipe(1)) id: number) {
     console.log(id);
-    return this.pipesService.findOne(id);
+    return users.find((item) => item.id === id);
+  }
+
+  @Post('custom-pipe')
+  testCustomPipe(@Body() body: UserDto) {
+    return body;
   }
 }
