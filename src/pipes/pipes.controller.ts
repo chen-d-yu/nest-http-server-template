@@ -16,7 +16,7 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { PipesService } from './pipes.service';
-import { ValidationPipe } from './common/validationPipe.pipe';
+import { CustomValidationPipe } from './common/custom-validationPipe.pipe';
 
 enum Gender {
   male = 'male',
@@ -24,7 +24,7 @@ enum Gender {
 }
 
 @Controller('pipes')
-@UsePipes(new ValidationPipe())
+@UsePipes(new CustomValidationPipe())
 export class PipesController {
   constructor(private readonly pipesService: PipesService) {}
 
@@ -90,7 +90,7 @@ export class PipesController {
   findOne(
     @Query(
       'id',
-      // , new ValidationPipe() // 参数作用域
+      // , new CustomValidationPipe() // 参数作用域
     )
     id: number,
   ) {

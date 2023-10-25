@@ -1,7 +1,7 @@
 import { PipeTransform, Injectable, ArgumentMetadata } from '@nestjs/common';
 
 @Injectable()
-export class ValidationPipe implements PipeTransform {
+export class CustomValidationPipe implements PipeTransform {
   transform(value: any, metadata: ArgumentMetadata) {
     //    interface ArgumentMetadata {
     //      type: 'body' | 'query' | 'param' | 'custom';告诉我们是从数据传输过来的，还是从自定义参数
