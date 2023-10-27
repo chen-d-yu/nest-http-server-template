@@ -5,7 +5,8 @@ import * as user from '../data/user.json';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStragety } from './local.stragety';
-const TOKEN_SECRET = '123456';
+import { jwtConstants } from './constant';
+import { JwtStrategy } from './jwt.stragety';
 
 @Module({
   providers: [
@@ -14,12 +15,13 @@ const TOKEN_SECRET = '123456';
       useValue: user,
     },
     LocalStragety,
+    JwtStrategy,
     AuthService,
   ],
   imports: [
     JwtModule.registerAsync({
       useFactory: () => ({
-        secret: TOKEN_SECRET,
+        secret: jwtConstants.secret,
         signOptions: { expiresIn: '1d' },
       }),
     }),

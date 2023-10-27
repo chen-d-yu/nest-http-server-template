@@ -13,7 +13,7 @@ export class LocalStragety extends PassportStrategy(Strategy, 'local') {
 
   async validate(name: string, password: string): Promise<any> {
     // 本地策略的逻辑，先从数据库中查找当前用户，然后返回当前用户，交由给下一步进行处理
-
+    console.log(name, password);
     const user = this.userData?.find((user) => {
       return user.name === name && user.password === password;
     });
