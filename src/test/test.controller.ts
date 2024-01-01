@@ -1,5 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('test')
 export class TestController {

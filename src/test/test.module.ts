@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TestController } from './test.controller';
-import { ConfigService } from '../config/config.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   controllers: [TestController],

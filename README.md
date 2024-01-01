@@ -1,3 +1,3 @@
-# 自定义配置模块
+# 动态模块配置案例
 
-自定义 ConfigModule 配置模块案例
+`@nestjs/config` 的 `ConfigModule` 动态模块配置案例

@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from './config/config.module';
 import * as path from 'path';
 import * as process from 'process';
 import { TestModule } from './test/test.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      folder: path.resolve(process.cwd(), 'src/config')
+      envFilePath: path.resolve(process.cwd(), 'src/config/.env')
     }),
     TestModule
   ]
