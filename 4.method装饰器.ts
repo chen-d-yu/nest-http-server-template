@@ -1,12 +1,12 @@
 /**
  *
- * target：
- * 如果方法装饰器装饰的是静态方法（也就是static方法），那么target表示的是当前类的构造函数 => target.prototype.constructor
- * 如果方法装饰器装饰的是原型方法（也就是类内部的实例方法），target表示的是当前类的原型对象 => target.prototype
+ * target：对于静态成员来说是类的构造器，对于实例成员来说是类的原型链。
  *
  * propertyKey：当前修饰的方法的方法名称
  *
  * descriptor：当前修饰的方法的描述符，毕竟方法也是属于对象上的一个属性，所以拥有属性描述符
+ *
+ * @返回： 如果返回了值，它会被用于替代属性的描述器。
  */
 import axios from "axios";
 
@@ -14,31 +14,40 @@ const Get = (url: string): MethodDecorator => {
   return (
     target: Object,
     propertyKey: string | symbol,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ) => {
-    console.log("🚀 ~ target", target);
+    const original = descriptor.value as Function;
 
-    console.log("🚀 ~ propertyKey", propertyKey);
+    descriptor.value = async function (...args: any[]) {
+      const params = Object.keys(args[0] as IParams).reduce(
+        (prev, item, currentIndex, array) => {
+          prev += `${currentIndex === 0 ? "?" : "&"}${item}=${args[0][item]}`;
+          return prev;
+        },
+        "",
+      );
+      const response = await axios.get(url + params);
+      const responseData = response.data;
 
-    const method = descriptor.value as Function;
-    axios.get(url).then((res:any) => {
-      method(res);
-    });
-
-    // 为了不改变this的指向，新的切面函数必须总是使用函数表达式，而不是使用箭头函数
-    descriptor.value = function (...args: any[]) {
-      console.log("🚀 ~ Before");
-
-      console.log("🚀 ~ after");
+      console.log("params: ", ...args);
+      const result = original.call(this, ...args, responseData);
+      console.log("result: ", result);
+      return result;
     };
   };
 };
 
+interface IParams {
+  page: number;
+  size: number;
+}
+
 class Http {
-  @Get("https://api.apiopen.top/api/getHaoKanVideo?page=0&size=5")
-  public getList(data: any) {
-    console.log("🚀 ~ data", data.data);
+  @Get("https://api.apiopen.top/api/getHaoKanVideo")
+  public getList(params: IParams, data?: any) {
+    console.log("🚀 ~ data", data);
+    return data;
   }
 }
 
-new Http();
+new Http().getList({ page: 1, size: 5 });

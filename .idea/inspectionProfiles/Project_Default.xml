@@ -132,8 +132,8 @@
     <inspection_tool class="ES6DestructuringVariablesMerge" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="ES6MissingAwait" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
+    <inspection_tool class="ES6MissingAwait" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="md" level="INFORMATION" enabled="false" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="ES6PossiblyAsyncFunction" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
@@ -141,8 +141,8 @@
     <inspection_tool class="ES6PreferShortImport" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="ES6RedundantAwait" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
+    <inspection_tool class="ES6RedundantAwait" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="md" level="INFORMATION" enabled="false" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="ES6RedundantNestingInTemplateLiteral" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
@@ -150,7 +150,7 @@
     <inspection_tool class="ES6ShorthandObjectProperty" enabled="true" level="INFORMATION" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="ES6TopLevelAwaitExpression" enabled="true" level="ERROR" enabled_by_default="false">
+    <inspection_tool class="ES6TopLevelAwaitExpression" enabled="true" level="ERROR" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="ES6UnusedImports" enabled="true" level="WARNING" enabled_by_default="true">
@@ -311,8 +311,8 @@
     <inspection_tool class="JSHint" enabled="true" level="ERROR" enabled_by_default="false">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="JSIgnoredPromiseFromCall" enabled="true" level="WEAK WARNING" enabled_by_default="true">
-      <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
+    <inspection_tool class="JSIgnoredPromiseFromCall" enabled="false" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="md" level="INFORMATION" enabled="false" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="JSIncompatibleTypesComparison" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
@@ -638,7 +638,7 @@
     <inspection_tool class="TrivialIfJS" enabled="true" level="WARNING" enabled_by_default="true">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
-    <inspection_tool class="TsLint" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="TsLint" enabled="true" level="WARNING" enabled_by_default="false">
       <scope name="md" level="INFORMATION" enabled="true" editorAttributes="INFORMATION_ATTRIBUTES" />
     </inspection_tool>
     <inspection_tool class="TypeScriptAbstractClassConstructorCanBeMadeProtected" enabled="true" level="WEAK WARNING" enabled_by_default="true">

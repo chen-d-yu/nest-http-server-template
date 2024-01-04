@@ -5,16 +5,19 @@
  */
 
 // 装饰器语法糖
-const decorator: ClassDecorator = (target) => {
-    target.prototype.name = "class装饰器";
+const Decorator: ClassDecorator = (target) => {
+  target.prototype.name = "class装饰器";
 };
 
-@decorator
-class Sugar {
+// 1.语法糖写法
+@Decorator
+class SyntacticSugar {
   constructor() {
     console.log((this as any).name);
   }
 }
 
-// 正常函数写法
-decorator(Sugar);
+// 2.函数写法
+Decorator(SyntacticSugar);
+
+new SyntacticSugar();

@@ -7,15 +7,17 @@
 
 const DecoratorFactory = (type: string): ClassDecorator => {
   return function (target) {
-    target.prototype.name = `当前的装饰器类型是 ${type}`;
+    target.prototype.name = `类型-- ${type}`;
   };
 };
 
-@DecoratorFactory("factory")
-class Factory {}
+@DecoratorFactory("Animal")
+class Animal {}
 
 @DecoratorFactory("person")
 class Person {}
 
-console.log("🚀 ~ 芜湖，爷来辣", (new Animal() as any).name);
-console.log("🚀 ~ 芜湖，爷来辣", (new Person() as any).name);
+console.log("Animal--", (new Animal() as any).name);
+console.log("Person--", (new Person() as any).name);
+
+export {};
