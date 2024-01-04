@@ -13,6 +13,7 @@ gen
 logs
 **/*.backup.*
 **/*.back.*
+dist
 
 node_modules
 bower_components

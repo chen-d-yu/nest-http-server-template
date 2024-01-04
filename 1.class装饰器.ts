@@ -15,20 +15,22 @@ const LoggerDecorator = <T extends { new (...args: any[]): {} }>(target: T) => {
 class Animal {}
 
 const LoggerDecoratorNewClass = <T extends { new (...args: any[]): {} }>(
-  target: T
+  target: T,
 ) => {
-  return class {
+  return class extends IAnimal {
     name: string = "new class";
     age: number = 18;
   };
 };
 
-interface IAnimal {
+class IAnimal {
   name?: string;
   age?: number;
 }
 
 @LoggerDecoratorNewClass
-class NewAnimal {}
+class NewAnimal extends IAnimal {}
 
-console.log((new NewAnimal() as IAnimal).name);
+console.log(new NewAnimal().name);
+
+export {};

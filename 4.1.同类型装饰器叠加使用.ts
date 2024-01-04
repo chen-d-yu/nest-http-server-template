@@ -1,25 +1,7 @@
-// const MessageDecorator: ClassDecorator = (target) => {
-//   console.log("MessageDecorator");
-//   target.prototype.success = (data: any) => {
-//     return {
-//       code: 200,
-//       data,
-//       message: "成功~MessageDecorator",
-//     };
-//   };
-// };
-//
-// const CallDecorator: ClassDecorator = (target) => {
-//   console.log("CallDecorator");
-//   target.prototype.success = (data: any) => {
-//     return {
-//       code: 200,
-//       data,
-//       message: "成功~CallDecorator",
-//     };
-//   };
-// };
-
+/**
+ * 对同一个目标应用多个装饰器，它们呈现的顺序是 `Koa洋葱模型`的顺序。也就是先会执行外层的装饰器代码，再执行调用内从的装饰器代码。
+ * 会先按定义顺序执行evaluate打印，再按照装饰顺序执行call打印
+ */
 const OrderDecorator: (key: string) => ClassDecorator = (key) => {
   console.log("evaluate:  ", key);
   return (target) => {

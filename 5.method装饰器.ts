@@ -10,6 +10,30 @@
  */
 import axios from "axios";
 
+const LoggerDecorator: MethodDecorator = function (
+  target,
+  propertyKey,
+  descriptor: PropertyDescriptor,
+) {
+  const original = descriptor.value as Function;
+
+  descriptor.value = function (...args: any[]) {
+    console.log("params: ", ...args);
+    const result = original.call(this, ...args);
+    console.log("result: ", result);
+    return result;
+  };
+};
+class LoggerTest {
+  @LoggerDecorator
+  add(x: number, y: number) {
+    return x + y;
+  }
+}
+const l = new LoggerTest();
+l.add(1, 2);
+
+// 最小Get装饰器案例
 const Get = (url: string): MethodDecorator => {
   return (
     target: Object,
@@ -51,3 +75,5 @@ class Http {
 }
 
 new Http().getList({ page: 1, size: 5 });
+
+export {};

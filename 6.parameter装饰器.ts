@@ -14,18 +14,37 @@
 import axios from "axios";
 import "reflect-metadata";
 
+interface IParams {
+  page: number;
+  size: number;
+}
+
 const Get = (url: string): MethodDecorator => {
   return (
     target: Object,
     propertyKey: string | symbol,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ) => {
-    const method = descriptor.value as Function;
-    const key = Reflect.getMetadata("key", target, propertyKey) as string;
+    const original = descriptor.value as Function;
 
-    axios.get(url).then((res) => {
-      method(key ? res.data[key] : res.data);
-    });
+    descriptor.value = async function (...args: any[]) {
+      const params = Object.keys(args[0] as IParams).reduce(
+        (prev, item, currentIndex, array) => {
+          prev += `${currentIndex === 0 ? "?" : "&"}${item}=${args[0][item]}`;
+          return prev;
+        },
+        "",
+      );
+      const response = await axios.get(url + params);
+      const responseData = response.data;
+      const key = Reflect.getMetadata("key", target, propertyKey) as string;
+
+      return original.call(
+        this,
+        ...args,
+        key ? responseData[key] : responseData,
+      );
+    };
   };
 };
 
@@ -37,10 +56,10 @@ const Result = (key: string): ParameterDecorator => {
 };
 
 class Http {
-  @Get("https://api.apiopen.top/api/getHaoKanVideo?page=0&size=5")
-  public getList(@Result("result") data: any) {
+  @Get("https://api.apiopen.top/api/getHaoKanVideo")
+  public getList(params: IParams, @Result("result") data?: any) {
     console.log("🚀 ~ data", data);
   }
 }
 
-new Http();
+new Http().getList({ page: 1, size: 5 });
