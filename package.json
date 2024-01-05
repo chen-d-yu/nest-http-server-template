@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/chen-d-yu/nest-http-server-template#readme",
   "dependencies": {
+    "async-validator": "^4.2.5",
     "axios": "^1.5.1",
     "prettier": "^3.0.3",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.2.1"
   }
 }
