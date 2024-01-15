@@ -8,21 +8,16 @@ import {
   Delete,
   Redirect,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
-
   /**
    * 创建用户
-   * @param createUserDto
+   * @param body
    */
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
+  create(@Body() body) {
+    return 'This action adds a new user';
   }
 
   /**
@@ -30,7 +25,7 @@ export class UserController {
    */
   @Get()
   findAll() {
-    return this.userService.findAll();
+    return `This action returns all user`;
   }
 
   /**
@@ -39,17 +34,17 @@ export class UserController {
    */
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+    return `This action returns a #${id} user`;
   }
 
   /**
    * 更新用户字段
    * @param id
-   * @param updateUserDto
+   * @param body
    */
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  update(@Param('id') id: string, @Body() body) {
+    return `This action updates a #${id} user`;
   }
 
   /**
@@ -58,7 +53,7 @@ export class UserController {
    */
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+    return `This action removes a #${id} user`;
   }
 
   /**
