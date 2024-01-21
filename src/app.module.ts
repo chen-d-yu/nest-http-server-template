@@ -3,11 +3,9 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { LoggerMiddleware } from "./middlewares/logger.middleware";
 import { functionalLogger } from "./middlewares/functionalLogger";
-import { CatsModule } from "./cats/cats.module";
-import { CatsController } from "./cats/cats.controller";
 
 @Module({
-  imports: [CatsModule],
+  imports: [],
   controllers: [AppController],
   providers: [AppService]
 })
