@@ -3,15 +3,29 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { LoggerMiddleware } from "./middlewares/logger.middleware";
 import { functionalLogger } from "./middlewares/functionalLogger";
+import { CatsModule } from "./cats/cats.module";
+import { CatsController } from "./cats/cats.controller";
 
 @Module({
-  imports: [],
+  imports: [CatsModule],
   controllers: [AppController],
   providers: [AppService]
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
+    // apply class middleware
     // consumer.apply(LoggerMiddleware).forRoutes("");
-    consumer.apply(functionalLogger).forRoutes("");
+
+    // apply functional middleware
+    // consumer.apply(functionalLogger).forRoutes(CatsController);
+
+    // apply multi middleware by chain
+    // consumer.apply(functionalLogger).forRoutes(CatsController).apply(LoggerMiddleware).forRoutes(CatsController);
+
+    // apply multi middleware by array
+    // consumer.apply(functionalLogger, LoggerMiddleware).forRoutes(CatsController);
+
+    // exclude route
+    consumer.apply(functionalLogger).exclude("cats").forRoutes("*");
   }
 }
