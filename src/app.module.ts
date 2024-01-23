@@ -1,11 +1,18 @@
 import { Module } from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { UserModule } from "./user/user.module";
-import { AuthModule } from "./auth/auth.module";
+import { JwtModule } from "@nestjs/jwt";
+import { TOKEN_SECRET } from "./constants/config";
 
 @Module({
-  imports: [UserModule, AuthModule],
+  imports: [
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: TOKEN_SECRET,
+        signOptions: { expiresIn: "1d" }
+      })
+    })
+  ],
   controllers: [AppController],
   providers: [AppService]
 })
