@@ -3,18 +3,14 @@ import { CatsService } from "./cats.service";
 import { Cat } from "./interfaces/cat.interface";
 import { CreateCatDto } from "./dto/create-cat.dto";
 import { AppService } from "../app.service";
+import { createMockService } from "./cats.module";
 
 @Controller("cats")
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
-
-  @Post()
-  async create(@Body() createCatDto: CreateCatDto) {
-    this.catsService.create(createCatDto);
-  }
+  constructor(private readonly mockService: CatsService) {}
 
   @Get()
-  async findAll(): Promise<Cat[]> {
-    return this.catsService.findAll();
+  findAll() {
+    return (this.mockService as unknown as ReturnType<typeof createMockService>).mockCreate();
   }
 }
