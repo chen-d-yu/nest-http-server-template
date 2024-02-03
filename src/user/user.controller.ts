@@ -6,11 +6,10 @@ import { TransformSexPipe } from "./pipes/transform-sex.pipe";
 export class UserController {
   /**
    * 创建用户
-   * @param sex
    * @param body
    */
   @Post()
-  create(@Body("sex", TransformSexPipe) sex: number, @Body() body: CreateUserDto) {
-    return `this action will adds a new user what sex is ${sex}, user info is ${JSON.stringify(body)}`;
+  create(@Body() body: CreateUserDto) {
+    return `this action will adds a new user, user info is ${JSON.stringify(body)}`;
   }
 }
