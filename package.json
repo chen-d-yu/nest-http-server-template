@@ -4,6 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
+  "module": "exnext",
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
@@ -24,8 +25,11 @@
     "@nestjs/core": "^10.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
+    "log4js": "^6.9.1",
+    "moment": "^2.30.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "stacktrace-js": "^2.0.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
